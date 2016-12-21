@@ -1,14 +1,13 @@
 package com.hanyu.cnba.models;
 
-import android.content.Context;
+import java.util.ArrayList;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by Dell on 2016/12/19.
  */
 public interface IMatchModel {
-    MatchListModel getMatchInfo(LinkedHashMap<String,String> map);
+    void getMatchInfo(String date);
 
 }

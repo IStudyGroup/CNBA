@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.android.volley.VolleyError;
 import com.hanyu.cnba.managers.NetManager;
+import com.hanyu.cnba.precenters.MatchListPresenter;
 import com.hanyu.cnba.utils.API;
 import com.hanyu.cnba.utils.Date;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,20 +17,24 @@ import java.util.Map;
  */
 public class MatchListModelImpl implements IMatchModel {
     private Context mContext;
-    MatchListModel listModel = null;
+    private MatchListPresenter mPresenter;
 
 
-    public MatchListModelImpl(Context context){
+    public MatchListModelImpl(Context context,MatchListPresenter presenter){
         mContext =  context;
+        mPresenter = presenter;
     }
 
+
     @Override
-    public MatchListModel getMatchInfo(LinkedHashMap <String,String> map){
+    public void getMatchInfo(String date) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("date", date);
         NetManager.doHttpGet(mContext, null, API.BASE_GET_MATCH_LIST, map, MatchListModel.class, new NetManager.ResponseListener<MatchListModel>() {
             @Override
             public void onResponse(MatchListModel response) {
                 if (response != null) {
-                    listModel = response;
+                    mPresenter.setData(response);
                 }
             }
 
@@ -42,7 +48,5 @@ public class MatchListModelImpl implements IMatchModel {
 
             }
         });
-        return listModel;
     }
-
 }
