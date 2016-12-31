@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class MatchListPresenter implements IMatchListPresenter {
     private IMatchModel iMatchModel;
     private IMatchListView iMatchListView;
-
     private Context mContext;
 
     public MatchListPresenter(Context mContext,IMatchListView matchListView){
@@ -28,12 +27,16 @@ public class MatchListPresenter implements IMatchListPresenter {
 
 
     @Override
-    public void setData(MatchListModel data) {
-        iMatchListView.setViewData(data);
+    public void setData(MatchListModel data,int source) {
+        iMatchListView.setViewData(data,source);
     }
 
+
+
     @Override
-    public void getData(String date) {
-        iMatchModel.getMatchInfo(date);
+    public void getData(String date,int source) {
+        iMatchModel.getMatchInfo(date,source);
     }
+
+
 }

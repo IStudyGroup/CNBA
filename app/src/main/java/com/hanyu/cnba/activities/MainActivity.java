@@ -1,10 +1,11 @@
 package com.hanyu.cnba.activities;
 
-import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+
+
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +27,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BasicActivity {
     private int currentFrg ;
+    @Bind(R.id.head_title)
+    TextView tv_title;
     @Bind(R.id.imgv_match)
     ImageView imgv_match;
     @Bind(R.id.tv_match)
@@ -46,25 +49,42 @@ public class MainActivity extends BasicActivity {
     ImageView imgv_more;
     @Bind(R.id.tv_more)
     TextView tv_more;
+   /* @Bind(R.id.pager)
+    ViewPager vp_fragment;*/
 
-
+    MatchFragment matchFragment;
+    MoreFragment moreFragment;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        if (savedInstanceState == null){
+            setDefaultFragment();
+        }else {
+            FragmentManager fgmM = getSupportFragmentManager();
+            FragmentTransaction ft = fgmM.beginTransaction();
+            BasicFragment fgm =(BasicFragment) getSupportFragmentManager().findFragmentByTag("match");
+            if (fgm != null) {
+                ft.replace(R.id.act_frg, fgm);
+                ft.commitAllowingStateLoss();
+            } else {
+                setDefaultFragment();
+            }
+        }
 
-        /**设置默认fra**/
-        setDefaultFragment();
+
     }
 
     private void setDefaultFragment() {
         currentFrg = 1;
-        FragmentManager fgmM = getSupportFragmentManager();
+        tv_title.setText("比赛");
+        FragmentManager fgmM = getSupportFragmentManager() ;
+       // Fragment mtcFgm = getFragmentManager().findFragmentByTag("tag");
         MatchFragment mtcFgm = new MatchFragment();
         FragmentTransaction ft = fgmM.beginTransaction();
-        ft.add(R.id.act_frg, mtcFgm, null);
+        ft.add(R.id.act_frg, mtcFgm,"match");
         ft.commitAllowingStateLoss();
         imgv_match.setSelected(true);
         tv_match.setSelected(true);
@@ -88,50 +108,75 @@ public class MainActivity extends BasicActivity {
     View getContentView() {
         return null;
     }
-
     @OnClick({R.id.layout_match, R.id.layout_latest, R.id.layout_video, R.id.layout_data, R.id.layout_more})
     public void onClick(View view) {
         BasicFragment fragment = null;
         int frgId = 1;
+        String tag = "match";
         switch (view.getId()){
             case R.id.layout_match:
-                 fragment = new MatchFragment();
+                if (matchFragment == null) {
+                    matchFragment = new MatchFragment();
+
+                }
+                fragment = matchFragment;
                  frgId = 1;
+                tag = "match";
+                tv_title.setText("比赛");
                 break;
             case R.id.layout_latest:
                 fragment = new LatestFragment();
                 frgId = 2;
+                tag = "latest";
+                tv_title.setText("最新");
                 break;
             case R.id.layout_video:
                 fragment = new VideoFragment();
                 frgId = 3;
+                tag = "video";
+                tv_title.setText("视频");
                 break;
             case R.id.layout_data:
                 fragment = new DataFragment();
                 frgId = 4;
+                tag = "data";
+                tv_title.setText("数据");
                 break;
             case R.id.layout_more:
                 fragment = new MoreFragment();
                 frgId = 5;
+                tag = "more";
+                tv_title.setText("更多");
                 break;
         }
         if(fragment != null) {
-            changeFrg(fragment,frgId);
+            changeFrg(fragment, frgId, tag);
         }
 
         changeBkg(view.getId());
 
     }
 
-    private void changeFrg(BasicFragment fragment,int id){
+    private void changeFrg(BasicFragment fragment,int id,String tag){
         if(currentFrg != id) {
+
             FragmentManager fgmM = getSupportFragmentManager();
             FragmentTransaction ft = fgmM.beginTransaction();
-            ft.replace(R.id.act_frg, fragment);
+            BasicFragment fgm =(BasicFragment) getSupportFragmentManager().findFragmentByTag(tag);
+            if (fgm != null) {
+                ft.replace(R.id.act_frg, fgm);
+                ft.commitAllowingStateLoss();
+            }
+            ft.replace(R.id.act_frg,fragment,tag);
             ft.commitAllowingStateLoss();
+           /* FragmentManager fgmM = getSupportFragmentManager();
+            FragmentTransaction ft = fgmM.beginTransaction();
+            ft.replace(R.id.act_frg, fragment,tag);
+            ft.commitAllowingStateLoss();*/
             currentFrg = id;
             CLog.i("+++++++++++++++++"+id+"+=====================");
         }
+
     }
     private void changeBkg(int id){
         switch (id) {

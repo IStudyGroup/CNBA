@@ -123,11 +123,13 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     protected void deliverResponse(T response) {
+        //CLog.i("Thread id deliverResponse: "+Thread.currentThread());
         mListener.onResponse(response);
     }
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
+
         try {
             String json = new String(response.data, "UTF-8");
             CLog.i("parseNetworkResponse ---> :" + json);

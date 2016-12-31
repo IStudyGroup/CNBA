@@ -7,7 +7,7 @@ import com.hanyu.cnba.models.MatchListModel;
  */
 
 public interface IMatchListPresenter {
-    void setData(MatchListModel data);
+    void setData(MatchListModel data,int source);
+    void getData(String date,int source);
 
-    void getData(String date);
 }

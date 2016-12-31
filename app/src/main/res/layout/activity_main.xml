@@ -3,65 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/window_background">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
         android:background="@color/colorPrimary"
-        android:id="@+id/linearLayout">
+        android:orientation="horizontal">
+
         <ImageView
-            android:background="@drawable/nba_logo"
-            android:layout_weight="0.6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_weight="0.6"
+            android:background="@drawable/nba_logo" />
+
         <ImageView
-            android:layout_weight="2.4"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="2.4" />
+
         <TextView
             android:id="@+id/head_title"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
             android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:textColor="@color/nba_white"
             android:gravity="center_horizontal"
-            android:textSize="35dp"
-            android:layout_gravity="center_vertical"/>
+            android:textColor="@color/nba_white"
+            android:textSize="25dp" />
+
         <ImageView
-            android:layout_weight="2.2"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="2.2" />
+
         <Button
-            android:layout_weight="0.8"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/mine_head"
-            android:layout_gravity="center_vertical"/>
+            android:layout_weight="0.8"
+            android:background="@drawable/mine_head" />
 
     </LinearLayout>
-    <FrameLayout
-        android:id="@+id/act_frg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout"
-        android:layout_above="@+id/linearLayout2">
 
-    </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/act_frg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linearLayout2"
+            android:layout_below="@+id/linearLayout">
+
+        </FrameLayout>
+
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="56.0dip"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout2">
+        android:background="@color/nba_white"
+        android:orientation="horizontal">
+
 
         <LinearLayout
             android:id="@+id/layout_match"
@@ -188,4 +200,13 @@
                 android:textSize="12.0sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/nba_light_grey" />
 </RelativeLayout>

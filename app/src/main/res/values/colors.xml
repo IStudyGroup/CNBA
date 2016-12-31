@@ -146,4 +146,8 @@
     <color name="trans">#00000000</color>
     <color name="window_background">#ffebebeb</color>
     <color name="yang_wu_game">#ffdcdcdc</color>
+    <color name="red">#ffc93437</color>
+    <color name="blue">#3c5eea</color>
+    <color name="yellow">#fff7d23e</color>
+    <color name="green">#ff37d23e</color>
 </resources>
