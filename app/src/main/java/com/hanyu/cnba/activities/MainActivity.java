@@ -53,6 +53,9 @@ public class MainActivity extends BasicActivity {
     ViewPager vp_fragment;*/
 
     MatchFragment matchFragment;
+    LatestFragment latestFragment;
+    VideoFragment videoFragment;
+    DataFragment dataFragment;
     MoreFragment moreFragment;
 
 
@@ -117,7 +120,6 @@ public class MainActivity extends BasicActivity {
             case R.id.layout_match:
                 if (matchFragment == null) {
                     matchFragment = new MatchFragment();
-
                 }
                 fragment = matchFragment;
                  frgId = 1;
@@ -125,25 +127,37 @@ public class MainActivity extends BasicActivity {
                 tv_title.setText("比赛");
                 break;
             case R.id.layout_latest:
-                fragment = new LatestFragment();
+                if (latestFragment == null) {
+                    latestFragment = new LatestFragment();
+                }
+                fragment  = latestFragment;
                 frgId = 2;
                 tag = "latest";
                 tv_title.setText("最新");
                 break;
             case R.id.layout_video:
-                fragment = new VideoFragment();
+                if (videoFragment == null) {
+                    videoFragment = new VideoFragment();
+                }
+                fragment = videoFragment;
                 frgId = 3;
                 tag = "video";
                 tv_title.setText("视频");
                 break;
             case R.id.layout_data:
-                fragment = new DataFragment();
+                if (dataFragment == null) {
+                    dataFragment = new DataFragment();
+                }
+                fragment = dataFragment;
                 frgId = 4;
                 tag = "data";
                 tv_title.setText("数据");
                 break;
             case R.id.layout_more:
-                fragment = new MoreFragment();
+                if (moreFragment == null) {
+                    moreFragment = new MoreFragment();
+                }
+                fragment = moreFragment;
                 frgId = 5;
                 tag = "more";
                 tv_title.setText("更多");
